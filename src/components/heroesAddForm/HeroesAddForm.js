@@ -1,16 +1,4 @@
-
-
-// Задача для этого компонента:
-// Реализовать создание нового героя с введенными данными. Он должен попадать
-// в общее состояние и отображаться в списке + фильтроваться
-// Уникальный идентификатор персонажа можно сгенерировать через uiid
-// Усложненная задача:
-// Персонаж создается и в файле json при помощи метода POST
-// Дополнительно:
-// Элементы <option></option> желательно сформировать на базе
-// данных из фильтров
-
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -22,7 +10,7 @@ const HeroesAddForm = () => {
     const [heroDescr, setHeroDescr] = useState("");
     const [heroElement, setHeroElement] = useState("");
 
-    const {filters, filtersLoadingStatus} = useSelector(state => state);
+    const {filters, filtersLoadingStatus} = useSelector(state => state.filters);
     const dispatch = useDispatch();
     const {request} = useHttp();
 
@@ -47,6 +35,7 @@ const HeroesAddForm = () => {
     }
 
     const renderFilters = (filters, status) => {
+        console.log("filter");
         if (status === "loading") {
             return <option>Загрузка элементов</option>
         } else if (status === "error") {
@@ -64,6 +53,8 @@ const HeroesAddForm = () => {
             })
         }
     }
+
+    const memoizedFilters = useMemo(() => renderFilters(filters, filtersLoadingStatus), [filters, filtersLoadingStatus]);
 
     return (
         <form className="border p-4 shadow-lg rounded" onSubmit={handleSubmit}>
@@ -103,7 +94,7 @@ const HeroesAddForm = () => {
                     value={heroElement}
                     onChange={(e) => setHeroElement(e.target.value)}>
                     <option >Я владею элементом...</option>
-                    {renderFilters(filters, filtersLoadingStatus)}
+                    {memoizedFilters}
                 </select>
             </div>
 

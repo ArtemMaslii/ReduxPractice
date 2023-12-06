@@ -2,7 +2,6 @@ import { memo } from "react";
 
 const HeroesListItem = ({name, description, element, handleDelete}) => {
 
-    console.log("MEMO");
     let elementClassName;
 
     switch (element) {
