@@ -1,0 +1,49 @@
+{
+  "heroes": [
+    {
+      "id": 3,
+      "name": "FireMan",
+      "description": "Too hot",
+      "element": "fire"
+    },
+    {
+      "id": "9a35095f-aab4-4a12-8564-9ab99f0190d3",
+      "name": "WaterMan",
+      "description": "Too wet",
+      "element": "water"
+    },
+    {
+      "id": "28b57537-ecd1-4ea4-b821-4dfba17ddf01",
+      "name": "Earth Spirit",
+      "description": "I can roll you",
+      "element": "earth"
+    }
+  ],
+  "filters": [
+    {
+      "name": "all",
+      "label": "Все",
+      "className": "btn-outline-dark"
+    },
+    {
+      "name": "fire",
+      "label": "Огонь",
+      "className": "btn-danger"
+    },
+    {
+      "name": "water",
+      "label": "Вода",
+      "className": "btn-primary"
+    },
+    {
+      "name": "wind",
+      "label": "Ветер",
+      "className": "btn-success"
+    },
+    {
+      "name": "earth",
+      "label": "Земля",
+      "className": "btn-secondary"
+    }
+  ]
+}
