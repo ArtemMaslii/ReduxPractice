@@ -2,13 +2,15 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
 
-import { activeFilterChanged } from "../../slices/filtersSlice";
+import store from "../../store";
+import { activeFilterChanged, selectAll } from "../../slices/filtersSlice";
 import { fetchedFilters } from "../../slices/filtersSlice";
 
 import Spinner from "../spinner/Spinner";
 
 const HeroesFilters = () => {
-    const {filters, filtersLoadingStatus, activeFilter} = useSelector(state => state.filters);
+    const {filtersLoadingStatus, activeFilter} = useSelector(state => state.filters);
+    const filters = selectAll(store.getState());
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -28,7 +30,7 @@ const HeroesFilters = () => {
         }
 
         // Данные в json-файле я расширил классами и текстом
-        return arr.map(({name, label, className}, i) => {
+        return arr.map(({name, label, className}) => {
 
             // Используем библиотеку classnames и формируем классы динамически
             const btnClass = classNames('btn', className, {
@@ -36,7 +38,7 @@ const HeroesFilters = () => {
             });
             
             return <button 
-                        key={i} 
+                        key={name} 
                         id={name} 
                         className={btnClass}
                         onClick={() => dispatch(activeFilterChanged(name))}
